@@ -1,4 +1,6 @@
-const computerChoice = ["Rock", "Paper", "Scissors"];
+console.log("Rock,Paper,Scissors VS. Computer");
+
+const computerChoice = ["rock", "paper", "scissors"];
 
 /* Math.floor = rounds number to nearest integer
 Math.random = returns random number between 0 - 1
@@ -16,15 +18,35 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock")
   ) {
-    return "Player won!";
+    return "Player";
   }
-  return "Computer won!";
+  return "Computer";
 }
 
-// function checkWinner(playerSelection, computerSelection) {}
+// `You Win! Big Brain ${playerSelection} beats Smooth Brain ${computerSelection}`
+// `Beaten by a computer? Noob! ${computerSelection} beats ${playerSelection}`
 
-const playerSelection = prompt(
-  "Choose between Rock, Paper and Scissors"
-).toLowerCase();
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  for (let round = 1; round <= 5; round++) {
+    const playerSelection = prompt(
+      "Choose between Rock, Paper or Scissors"
+    ).toLowerCase();
+    const computerSelection = getComputerChoice();
+    const roundResult = playRound(playerSelection, computerSelection);
+
+    console.log(`Round ${round}: ${roundResult}`);
+
+    if (roundResult === "Player") {
+      playerScore++;
+    } else if (roundResult === "Computer") {
+      computerScore++;
+    }
+  }
+  console.log("--------");
+  console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+}
+
+game();
