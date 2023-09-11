@@ -1,2 +1,2 @@
-# odin-js
-Collection of Javascript exercises and challenges from The Odin Project
+# The-Odin-Project
+Collection of exercises and challenges while learning web development from The Odin Project.
