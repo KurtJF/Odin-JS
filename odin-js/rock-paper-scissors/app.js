@@ -1,4 +1,5 @@
 console.log("Rock,Paper,Scissors VS. Computer");
+console.log("--------");
 
 const computerChoice = ["rock", "paper", "scissors"];
 
@@ -10,6 +11,32 @@ function getComputerChoice() {
   return computerChoice[Math.floor(Math.random() * computerChoice.length)];
 }
 
+// function playRound(playerSelection, computerSelection) {
+//   if (playerSelection === computerSelection) {
+//     return "Draw";
+//   } else if (
+//     (playerSelection === "scissors" && computerSelection === "paper") ||
+//     (playerSelection === "rock" && computerSelection === "scissors") ||
+//     (playerSelection === "paper" && computerSelection === "rock")
+//   ) {
+//     return `You Win! Big Brain ${playerSelection} beats Smooth Brain ${computerSelection}`;
+//   }
+//   return `Beaten by a computer? Noob! ${computerSelection} beats ${playerSelection}`;
+// }
+
+const winText = ["You Win! Big Brain", "Humans for the win!", "Nice Play!"];
+
+const loseText = [
+  "Computer dominance! Better luck next time!",
+  "The machines are taking over!",
+  "Computer's got skills!",
+];
+
+function getRandomElement(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     return "Draw";
@@ -18,13 +45,16 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock")
   ) {
-    return "Player";
+    const winMessage = `${getRandomElement(
+      winText
+    )} ${playerSelection} beats ${computerSelection}!`;
+    return winMessage;
   }
-  return "Computer";
+  const loseMessage = `${getRandomElement(
+    loseText
+  )} ${computerSelection} beats your${playerSelection}!`;
+  return loseMessage;
 }
-
-// `You Win! Big Brain ${playerSelection} beats Smooth Brain ${computerSelection}`
-// `Beaten by a computer? Noob! ${computerSelection} beats ${playerSelection}`
 
 function game() {
   let playerScore = 0;
@@ -35,18 +65,44 @@ function game() {
       "Choose between Rock, Paper or Scissors"
     ).toLowerCase();
     const computerSelection = getComputerChoice();
-    const roundResult = playRound(playerSelection, computerSelection);
+    // const roundResult = playRound(playerSelection, computerSelection);
+    const roundResult = playRound(
+      playerSelection,
+      computerSelection,
+      winText,
+      loseText
+    );
 
     console.log(`Round ${round}: ${roundResult}`);
 
-    if (roundResult === "Player") {
+    // if (roundResult.includes("Win", "Nice", "Humans")) {
+    //   playerScore++;
+    // } else if (roundResult.includes("Lose", "Computer", "machines")) {
+    //   computerScore++;
+    // }
+    if (
+      roundResult.includes("Win") ||
+      roundResult.includes("Nice") ||
+      roundResult.includes("Humans")
+    ) {
       playerScore++;
-    } else if (roundResult === "Computer") {
+    } else if (
+      roundResult.includes("Lose") ||
+      roundResult.includes("Computer") ||
+      roundResult.includes("machines")
+    ) {
       computerScore++;
     }
   }
   console.log("--------");
   console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+  if (playerScore > computerScore) {
+    console.log("Player Wins");
+  } else if (playerScore < computerScore) {
+    console.log("Computer Wins");
+  } else {
+    console.log("Draw");
+  }
 }
 
 game();
