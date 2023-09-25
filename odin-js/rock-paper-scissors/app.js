@@ -1,6 +1,3 @@
-console.log("Rock,Paper,Scissors VS. Computer");
-console.log("--------");
-
 const computerChoice = ["rock", "paper", "scissors"];
 
 /* Math.floor = rounds number to nearest integer
@@ -56,53 +53,60 @@ function playRound(playerSelection, computerSelection) {
   return loseMessage;
 }
 
+const rock = document.querySelector("#rock");
+rock.addEventListener("click", playRound());
+const paper = document.querySelector("#paper");
+paper.addEventListener("click", playRound());
+const scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", playRound());
+
 function game() {
   let playerScore = 0;
   let computerScore = 0;
 
-  for (let round = 1; round <= 5; round++) {
-    const playerSelection = prompt(
-      "Choose between Rock, Paper or Scissors"
-    ).toLowerCase();
-    const computerSelection = getComputerChoice();
-    // const roundResult = playRound(playerSelection, computerSelection);
-    const roundResult = playRound(
-      playerSelection,
-      computerSelection,
-      winText,
-      loseText
-    );
+  // for (let round = 1; round <= 5; round++) {
+  const playerSelection = prompt(
+    "Choose between Rock, Paper or Scissors"
+  ).toLowerCase();
+  const computerSelection = getComputerChoice();
+  // const roundResult = playRound(playerSelection, computerSelection);
+  const roundResult = playRound(
+    playerSelection,
+    computerSelection,
+    winText,
+    loseText
+  );
 
-    console.log(`Round ${round}: ${roundResult}`);
+  console.log(`Round ${round}: ${roundResult}`);
 
-    // if (roundResult.includes("Win", "Nice", "Humans")) {
-    //   playerScore++;
-    // } else if (roundResult.includes("Lose", "Computer", "machines")) {
-    //   computerScore++;
-    // }
-    if (
-      roundResult.includes("Win") ||
-      roundResult.includes("Nice") ||
-      roundResult.includes("Humans")
-    ) {
-      playerScore++;
-    } else if (
-      roundResult.includes("Lose") ||
-      roundResult.includes("Computer") ||
-      roundResult.includes("machines")
-    ) {
-      computerScore++;
-    }
-  }
-  console.log("--------");
-  console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
-  if (playerScore > computerScore) {
-    console.log("Player Wins");
-  } else if (playerScore < computerScore) {
-    console.log("Computer Wins");
-  } else {
-    console.log("Draw");
+  // if (roundResult.includes("Win", "Nice", "Humans")) {
+  //   playerScore++;
+  // } else if (roundResult.includes("Lose", "Computer", "machines")) {
+  //   computerScore++;
+  // }
+  if (
+    roundResult.includes("Win") ||
+    roundResult.includes("Nice") ||
+    roundResult.includes("Humans")
+  ) {
+    playerScore++;
+  } else if (
+    roundResult.includes("Lose") ||
+    roundResult.includes("Computer") ||
+    roundResult.includes("machines")
+  ) {
+    computerScore++;
   }
 }
+console.log("--------");
+console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+if (playerScore > computerScore) {
+  console.log("Player Wins");
+} else if (playerScore < computerScore) {
+  console.log("Computer Wins");
+} else {
+  console.log("Draw");
+}
+// }
 
 game();
