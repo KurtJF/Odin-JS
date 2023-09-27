@@ -8,19 +8,6 @@ function getComputerChoice() {
   return computerChoice[Math.floor(Math.random() * computerChoice.length)];
 }
 
-// function playRound(playerSelection, computerSelection) {
-//   if (playerSelection === computerSelection) {
-//     return "Draw";
-//   } else if (
-//     (playerSelection === "scissors" && computerSelection === "paper") ||
-//     (playerSelection === "rock" && computerSelection === "scissors") ||
-//     (playerSelection === "paper" && computerSelection === "rock")
-//   ) {
-//     return `You Win! Big Brain ${playerSelection} beats Smooth Brain ${computerSelection}`;
-//   }
-//   return `Beaten by a computer? Noob! ${computerSelection} beats ${playerSelection}`;
-// }
-
 const winText = ["You Win! Big Brain", "Humans for the win!", "Nice Play!"];
 
 const loseText = [
@@ -54,20 +41,28 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const rock = document.querySelector("#rock");
-rock.addEventListener("click", playRound());
+rock.addEventListener("click", () => {
+  const playerSelection = "rock";
+  playRound(playerSelection);
+});
 const paper = document.querySelector("#paper");
-paper.addEventListener("click", playRound());
+paper.addEventListener("click", () => {
+  const playerSelection = "paper";
+  playRound(playerSelection);
+});
 const scissors = document.querySelector("#scissors");
-scissors.addEventListener("click", playRound());
+scissors.addEventListener("click", () => {
+  const playerSelection = "scissors";
+  playRound(playerSelection);
+});
+
+const roundResult = document.getElementById("roundResult");
 
 function game() {
   let playerScore = 0;
   let computerScore = 0;
 
   // for (let round = 1; round <= 5; round++) {
-  const playerSelection = prompt(
-    "Choose between Rock, Paper or Scissors"
-  ).toLowerCase();
   const computerSelection = getComputerChoice();
   // const roundResult = playRound(playerSelection, computerSelection);
   const roundResult = playRound(
@@ -77,13 +72,9 @@ function game() {
     loseText
   );
 
-  console.log(`Round ${round}: ${roundResult}`);
+  // console.log(`Round ${round}: ${roundResult}`);
+  roundResult.textContent = `Round ${round}: ${roundResult}`;
 
-  // if (roundResult.includes("Win", "Nice", "Humans")) {
-  //   playerScore++;
-  // } else if (roundResult.includes("Lose", "Computer", "machines")) {
-  //   computerScore++;
-  // }
   if (
     roundResult.includes("Win") ||
     roundResult.includes("Nice") ||
@@ -98,8 +89,11 @@ function game() {
     computerScore++;
   }
 }
-console.log("--------");
-console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+
+const winner = document.getElementById("winner");
+
+// console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+winner.textContent = `Final Score: Player ${playerScore} - Computer ${computerScore}`;
 if (playerScore > computerScore) {
   console.log("Player Wins");
 } else if (playerScore < computerScore) {
