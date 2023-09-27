@@ -90,7 +90,7 @@ function game() {
   }
 }
 
-const winner = document.getElementById("winner");
+const scorePlayer = document.getElementById("winner");
 
 // console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
 winner.textContent = `Final Score: Player ${playerScore} - Computer ${computerScore}`;
