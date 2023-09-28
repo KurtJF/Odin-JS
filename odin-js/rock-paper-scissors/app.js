@@ -40,27 +40,27 @@ function playRound(playerSelection, computerSelection) {
   return loseMessage;
 }
 
-const rock = document.querySelector("#rock");
-rock.addEventListener("click", () => {
-  const playerSelection = "rock";
-  playRound(playerSelection);
-});
-const paper = document.querySelector("#paper");
-paper.addEventListener("click", () => {
-  const playerSelection = "paper";
-  playRound(playerSelection);
-});
-const scissors = document.querySelector("#scissors");
-scissors.addEventListener("click", () => {
-  const playerSelection = "scissors";
-  playRound(playerSelection);
-});
-
 const roundResult = document.getElementById("roundResult");
 
 function game() {
   let playerScore = 0;
   let computerScore = 0;
+
+  const rock = document.querySelector("#rock");
+  rock.addEventListener("click", () => {
+    const playerSelection = "rock";
+    playRound(playerSelection);
+  });
+  const paper = document.querySelector("#paper");
+  paper.addEventListener("click", () => {
+    const playerSelection = "paper";
+    playRound(playerSelection);
+  });
+  const scissors = document.querySelector("#scissors");
+  scissors.addEventListener("click", () => {
+    const playerSelection = "scissors";
+    playRound(playerSelection);
+  });
 
   // for (let round = 1; round <= 5; round++) {
   const computerSelection = getComputerChoice();
@@ -90,9 +90,8 @@ function game() {
   }
 }
 
-const scorePlayer = document.getElementById("winner");
-
 // console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
+const winner = document.getElementById("winner");
 winner.textContent = `Final Score: Player ${playerScore} - Computer ${computerScore}`;
 if (playerScore > computerScore) {
   console.log("Player Wins");
