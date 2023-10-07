@@ -9,38 +9,46 @@
   </head>
   <body>
     <main>
-      <h1>Rock, Paper, Scissors VS. Computer</h1>
+      <h1>Rock, Paper, Scissors VS Computer</h1>
 
-      <div class="results-container">
-        <p id="roundNumber" class="round">round 1</p>
-        <p id="roundResult" class="round">Round result who won</p>
+      <section class="results-container">
+        <p id="round-num" class="round">round 1</p>
+        <p id="round-result" class="round"></p>
 
         <div class="score-container">
-          <div class="player">
-            <div class="choice">picture</div>
-            <p id="playerScore" class="score">score</p>
+          <div class="player-choice player">
+            <img
+              id="player-image"
+              src="./images/question-mark.png"
+              alt="Player's Choice"
+            />
+            <p id="player-score" class="score">Player score</p>
           </div>
-
-          <div class="computer">
-            <div class="choice">picture</div>
-            <p id="computerScore" class="score">score</p>
+          <p class="vs">VS</p>
+          <div class="comp-choice computer">
+            <img
+              id="comp-image"
+              src="./images/question-mark.png"
+              alt="Computer's Choice"
+            />
+            <p id="comp-score" class="score">Computer score</p>
           </div>
         </div>
 
-        <p id="roundWinner" class="round">Winner</p>
-      </div>
+        <p id="round-winner" class="round"></p>
+      </section>
 
-      <div class="button-container">
-        <button id="rock">
-          <img src="./images/rocks.png" alt="rock" />
+      <section class="button-container">
+        <button id="btn-rock" class="btn" aria-label="Rock">
+          <img src="./images/rock.png" alt="rock" />
         </button>
-        <button id="paper">
-          <img src="./images/scroll.png" alt="paper" />
+        <button id="btn-paper" class="btn" aria-label="Paper">
+          <img src="./images/paper.png" alt="paper" />
         </button>
-        <button id="scissors">
+        <button id="btn-scissors" class="btn" aria-label="Scissors">
           <img src="./images/scissors.png" alt="scissors" />
         </button>
-      </div>
+      </section>
     </main>
   </body>
 </html>
