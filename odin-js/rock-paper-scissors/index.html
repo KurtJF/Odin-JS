@@ -20,8 +20,8 @@
         <div class="score-container">
           <div class="player-choice choice">
             <img
-              class="choice-image"
               id="player-image"
+              class="choice-image"
               src="./images/question-mark.png"
               alt="Player's Choice"
             />
@@ -30,8 +30,8 @@
           <p class="vs">VS</p>
           <div class="comp-choice choice">
             <img
-              class="choice-image"
               id="comp-image"
+              class="choice-image"
               src="./images/question-mark.png"
               alt="Computer's Choice"
             />
@@ -52,12 +52,16 @@
         </button>
       </section>
 
-      <div class="modal" id="end-modal">
+      <div id="end-modal" class="modal">
         <p id="round-winner" class="modal-winner">Placeholder</p>
-        <button class="btn-restart" id="restart-btn" aria-label="Play Again">
+        <button id="restart-btn" class="btn-restart" aria-label="Play Again">
           Play again
         </button>
       </div>
+      <div id="overlay" class="overlay"></div>
     </main>
+    <footer class="attribution">
+      Coded by <a href="https://github.com/KurtJF">KurtJF</a>.
+    </footer>
   </body>
 </html>
