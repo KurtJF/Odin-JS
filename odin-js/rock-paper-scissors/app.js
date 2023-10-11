@@ -1,42 +1,37 @@
-console.log("Rock,Paper,Scissors VS. Computer");
-console.log("--------");
-
 const computerChoice = ["rock", "paper", "scissors"];
-
-/* Math.floor = rounds number to nearest integer
-Math.random = returns random number between 0 - 1
-Math.floor > rounds down > Math.random (0-1) > multiplies to 3 > 
-0 = rock , 1 = paper, 2 = scissors */
-function getComputerChoice() {
-  return computerChoice[Math.floor(Math.random() * computerChoice.length)];
-}
-
-// function playRound(playerSelection, computerSelection) {
-//   if (playerSelection === computerSelection) {
-//     return "Draw";
-//   } else if (
-//     (playerSelection === "scissors" && computerSelection === "paper") ||
-//     (playerSelection === "rock" && computerSelection === "scissors") ||
-//     (playerSelection === "paper" && computerSelection === "rock")
-//   ) {
-//     return `You Win! Big Brain ${playerSelection} beats Smooth Brain ${computerSelection}`;
-//   }
-//   return `Beaten by a computer? Noob! ${computerSelection} beats ${playerSelection}`;
-// }
-
-const winText = ["You Win! Big Brain", "Humans for the win!", "Nice Play!"];
-
-const loseText = [
-  "Computer dominance! Better luck next time!",
+const winTexts = ["You Win! Big Brain", "Humans for the win!", "Nice Play!"];
+const loseTexts = [
+  "Computer dominance!",
   "The machines are taking over!",
   "Computer's got skills!",
 ];
 
-function getRandomElement(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
-}
+const playerImage = document.getElementById("player-image");
+const computerImage = document.getElementById("comp-image");
+const buttons = document.querySelectorAll(".btn");
 
+let playerScore = 0;
+let computerScore = 0;
+let roundsPlayed = 0;
+
+const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const getComputerChoice = () => {
+  return computerChoice[Math.floor(Math.random() * computerChoice.length)];
+};
+
+// Update image based on player choice and comp choice
+const updatePlayerChoiceImage = (choice) => {
+  const imagePath = `./images/${choice}.png`;
+  playerImage.src = imagePath;
+};
+
+const updateComputerChoiceImage = (choice) => {
+  const imagePath = `./images/${choice}.png`;
+  computerImage.src = imagePath;
+};
+
+// Rock, paper, scissors game logic
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     return "Draw";
@@ -45,41 +40,66 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock")
   ) {
-    const winMessage = `${getRandomElement(
-      winText
+    return `${getRandomElement(
+      winTexts
     )} ${playerSelection} beats ${computerSelection}!`;
-    return winMessage;
   }
-  const loseMessage = `${getRandomElement(
-    loseText
-  )} ${computerSelection} beats your${playerSelection}!`;
-  return loseMessage;
+  return `${getRandomElement(
+    loseTexts
+  )} ${computerSelection} beats ${playerSelection}!`;
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
+const updateScores = () => {
+  document.getElementById(
+    "player-score"
+  ).textContent = `Player Score: ${playerScore}`;
+  document.getElementById(
+    "comp-score"
+  ).textContent = `Computer Score: ${computerScore}`;
+};
 
-  for (let round = 1; round <= 5; round++) {
-    const playerSelection = prompt(
-      "Choose between Rock, Paper or Scissors"
-    ).toLowerCase();
-    const computerSelection = getComputerChoice();
-    // const roundResult = playRound(playerSelection, computerSelection);
-    const roundResult = playRound(
-      playerSelection,
-      computerSelection,
-      winText,
-      loseText
+const updateRoundInfo = (round, result) => {
+  document.getElementById("round-num").textContent = `Round ${round}`;
+  document.getElementById("round-result").textContent = result;
+};
+
+function game() {
+  // let round = 1;
+  let gameEnded = false;
+
+  const playAgain = () => {
+    playerScore = 0;
+    computerScore = 0;
+    roundsPlayed = 0;
+    gameEnded = false;
+
+    updateScores();
+    updatePlayerChoiceImage("question-mark");
+    updateComputerChoiceImage("question-mark");
+    updateRoundInfo(
+      "First to score 5 points wins!",
+      "Do your best to beat the computer!"
     );
 
-    console.log(`Round ${round}: ${roundResult}`);
+    buttons.forEach((button) => {
+      button.addEventListener("click", handleClick);
+      button.disabled = false;
+    });
 
-    // if (roundResult.includes("Win", "Nice", "Humans")) {
-    //   playerScore++;
-    // } else if (roundResult.includes("Lose", "Computer", "machines")) {
-    //   computerScore++;
-    // }
+    closeEndModal();
+  };
+
+  const playRoundCheckWinner = (playerSelection) => {
+    if (gameEnded) {
+      return;
+    }
+
+    const computerSelection = getComputerChoice();
+    const roundResult = playRound(playerSelection, computerSelection);
+    updatePlayerChoiceImage(playerSelection);
+    updateComputerChoiceImage(computerSelection);
+    updateRoundInfo(roundsPlayed + 1, roundResult);
+
     if (
       roundResult.includes("Win") ||
       roundResult.includes("Nice") ||
@@ -93,16 +113,56 @@ function game() {
     ) {
       computerScore++;
     }
-  }
-  console.log("--------");
-  console.log(`Final Score: Player ${playerScore} - Computer ${computerScore}`);
-  if (playerScore > computerScore) {
-    console.log("Player Wins");
-  } else if (playerScore < computerScore) {
-    console.log("Computer Wins");
-  } else {
-    console.log("Draw");
-  }
+
+    updateScores();
+
+    roundsPlayed++;
+
+    if (playerScore >= 5 || computerScore >= 5) {
+      gameEnded = true;
+      if (playerScore > computerScore) {
+        openEndModal("You Win!");
+      } else if (playerScore < computerScore) {
+        openEndModal("Computer Wins!");
+      } else {
+        openEndModal("Draw!");
+      }
+
+      // Disable buttons after the game ends
+      buttons.forEach((button) => {
+        button.removeEventListener("click", handleClick);
+        button.disabled = true;
+      });
+    }
+  };
+
+  const handleClick = (event) => {
+    const playerSelection = event.currentTarget.id.substring(4);
+    playRoundCheckWinner(playerSelection);
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", handleClick);
+  });
+
+  restartBtn.addEventListener("click", playAgain);
+}
+
+const endModal = document.getElementById("end-modal");
+const restartBtn = document.getElementById("restart-btn");
+const overlay = document.getElementById("overlay");
+
+overlay.addEventListener("click", closeEndModal);
+
+function openEndModal(winner) {
+  document.getElementById("round-winner").textContent = winner;
+  endModal.classList.add("active");
+  overlay.classList.add("active");
+}
+
+function closeEndModal() {
+  endModal.classList.remove("active");
+  overlay.classList.remove("active");
 }
 
 game();

@@ -3,8 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="app.js" async></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
     <title>Odin-RPS</title>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <h1>Rock, Paper, Scissors VS Computer</h1>
+
+      <section class="results-container">
+        <h2 id="round-num" class="round">First to score 5 points wins!</h2>
+        <p id="round-result" class="round">
+          Do your best to beat the computer!
+        </p>
+
+        <div class="score-container">
+          <div class="player-choice choice">
+            <img
+              id="player-image"
+              class="choice-image"
+              src="./images/question-mark.png"
+              alt="Player's Choice"
+            />
+            <p id="player-score" class="score">Player Score: 0</p>
+          </div>
+          <p class="vs">VS</p>
+          <div class="comp-choice choice">
+            <img
+              id="comp-image"
+              class="choice-image"
+              src="./images/question-mark.png"
+              alt="Computer's Choice"
+            />
+            <p id="comp-score" class="score">Computer Score: 0</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="button-container">
+        <button id="btn-rock" class="btn" aria-label="Rock">
+          <img src="./images/rock.png" alt="rock" />
+        </button>
+        <button id="btn-paper" class="btn" aria-label="Paper">
+          <img src="./images/paper.png" alt="paper" />
+        </button>
+        <button id="btn-scissors" class="btn" aria-label="Scissors">
+          <img src="./images/scissors.png" alt="scissors" />
+        </button>
+      </section>
+
+      <div id="end-modal" class="modal">
+        <p id="round-winner" class="modal-winner">Placeholder</p>
+        <button id="restart-btn" class="btn-restart" aria-label="Play Again">
+          Play again
+        </button>
+      </div>
+      <div id="overlay" class="overlay"></div>
+    </main>
+    <footer class="attribution">
+      Coded by <a href="https://github.com/KurtJF">KurtJF</a>.
+    </footer>
+  </body>
 </html>
