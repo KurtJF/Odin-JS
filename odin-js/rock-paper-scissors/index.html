@@ -12,32 +12,32 @@
       <h1>Rock, Paper, Scissors VS Computer</h1>
 
       <section class="results-container">
-        <p id="round-num" class="round">First to score 5 points wins!</p>
+        <h2 id="round-num" class="round">First to score 5 points wins!</h2>
         <p id="round-result" class="round">
           Do your best to beat the computer!
         </p>
 
         <div class="score-container">
-          <div class="player-choice player">
+          <div class="player-choice choice">
             <img
+              class="choice-image"
               id="player-image"
               src="./images/question-mark.png"
               alt="Player's Choice"
             />
-            <p id="player-score" class="score"></p>
+            <p id="player-score" class="score">Player Score: 0</p>
           </div>
           <p class="vs">VS</p>
-          <div class="comp-choice computer">
+          <div class="comp-choice choice">
             <img
+              class="choice-image"
               id="comp-image"
               src="./images/question-mark.png"
               alt="Computer's Choice"
             />
-            <p id="comp-score" class="score"></p>
+            <p id="comp-score" class="score">Computer Score: 0</p>
           </div>
         </div>
-
-        <p id="round-winner" class="round"></p>
       </section>
 
       <section class="button-container">
@@ -51,6 +51,13 @@
           <img src="./images/scissors.png" alt="scissors" />
         </button>
       </section>
+
+      <div class="modal" id="end-modal">
+        <p id="round-winner" class="modal-winner">Placeholder</p>
+        <button class="btn-restart" id="restart-btn" aria-label="Play Again">
+          Play again
+        </button>
+      </div>
     </main>
   </body>
 </html>
