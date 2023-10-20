@@ -23,3 +23,10 @@ body {
 }
 
 /* START */
+:root {
+  --white: #ffff;
+  --black: #000000;
+
+  --primary-color: #404040;
+  --secondary-color: #f2715a;
+}
