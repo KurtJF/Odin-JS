@@ -1,7 +1,18 @@
+const gridContainer = document.getElementById("grid-container");
+
 let gridSize = 16;
 
-const grid = document.getElementById("grid");
+const createGrid = () => {
+  gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+  gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
-const createGrid = (gridSize) => {};
+  for (let i = 0; i < gridSize * gridSize; i++) {
+    const grid = document.createElement("div");
+    grid.classList.add("grid");
+    gridContainer.appendChild(grid);
+  }
+};
 
-const colorChange = (event) => {};
+createGrid();
+
+// const colorChange = (event) => {};
