@@ -14,8 +14,18 @@
     <main class="main-container">
       <section class="content-container">
         <div id="grid-container" class="grid-container"></div>
-        <nav id="nav" class="settings-container">
-          <button id="size" class="grid-size">Grid Size</button>
+        <nav id="settings" class="settings-container">
+          <div class="gridsize-container">
+            <label id="grid-size-label" for="grid-size">16 x 16</label>
+            <input
+              id="grid-size"
+              class="grid-size"
+              type="range"
+              min="1"
+              max="100"
+              value="16"
+            />
+          </div>
           <input id="color" class="color-picker" type="color" value="#FFFF" />
           <button id="reset" class="reset" aria-label="Reset Button">
             Reset
