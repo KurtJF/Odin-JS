@@ -10,6 +10,10 @@ const updateGridSize = (newGridSize) => {
   sizeValue.innerHTML = `${newGridSize} x ${newGridSize}`;
 };
 
+const randomColor = () => {
+  Math.floor(Math.random() * 16777215).toString(16);
+};
+
 colorPicker.addEventListener("input", (event) => {
   const selectedColor = event.target.value;
   document.querySelector(".grid").forEach((grid) => {
@@ -29,6 +33,14 @@ btnReset.addEventListener("click", () => {
   createGrid(gridSize);
 });
 
+document.addEventListener("mousedown", () => {
+  isMouseDown = true;
+});
+
+document.addEventListener("mouseup", () => {
+  isMouseDown = false;
+});
+
 const createGrid = () => {
   gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
   gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
@@ -38,14 +50,10 @@ const createGrid = () => {
     grid.classList.add("grid");
     gridContainer.appendChild(grid);
 
-    grid.addEventListener("mousedown", () => {
-      isMouseDown = true;
-      grid.style.backgroundColor = colorPicker.value;
-    });
-
     grid.addEventListener("mouseover", () => {
-      isMouseDown = true;
-      grid.style.backgroundColor = colorPicker.value;
+      if (isMouseDown === true) {
+        grid.style.backgroundColor = colorPicker.value;
+      }
     });
   }
 };
