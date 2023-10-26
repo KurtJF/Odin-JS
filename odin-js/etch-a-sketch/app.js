@@ -1,30 +1,36 @@
 const gridContainer = document.getElementById("grid-container");
+const sizeValue = document.getElementById("grid-size-label");
+const sizeRange = document.getElementById("grid-size");
 const btnReset = document.getElementById("reset");
 const colorPicker = document.getElementById("color");
+const btnRandom = document.getElementById("random-color");
 
 let gridSize = 16;
 let isMouseDown = false;
+let userRandomColor = false;
 
 const updateGridSize = (newGridSize) => {
   gridSize.innerHTML = newGridSize;
   sizeValue.innerHTML = `${newGridSize} x ${newGridSize}`;
 };
 
-const randomColor = () => {
-  Math.floor(Math.random() * 16777215).toString(16);
-};
-
-colorPicker.addEventListener("input", (event) => {
-  const selectedColor = event.target.value;
-  document.querySelector(".grid").forEach((grid) => {
-    grid.style.backgroundColor = selectedColor;
-  });
+btnRandom.addEventListener("click", () => {
+  userRandomColor = !userRandomColor;
 });
 
-// const rangeSize = () => {
-//   sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
-// sizeSlider.onchange = (e) => changeSize(e.target.value)
-// }
+colorPicker.addEventListener("input", (event) => {
+  userRandomColor = false;
+});
+
+const getRandomColor = () => {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+};
+
+const applyColor = (color) => {
+  document.querySelectorAll(".grid").forEach((grid) => {
+    grid.style.backgroundColor = color;
+  });
+};
 
 // Reset Etch-A-Sketch
 btnReset.addEventListener("click", () => {
@@ -51,8 +57,11 @@ const createGrid = () => {
     gridContainer.appendChild(grid);
 
     grid.addEventListener("mouseover", () => {
-      if (isMouseDown === true) {
-        grid.style.backgroundColor = colorPicker.value;
+      if (isMouseDown) {
+        const selectedColor = userRandomColor
+          ? getRandomColor()
+          : colorPicker.value;
+        grid.style.backgroundColor = selectedColor;
       }
     });
   }
