@@ -49,6 +49,7 @@ h1 {
 main {
   margin: auto;
   max-width: 60rem;
+  /* max-height: 60rem; */
 }
 
 .content-container {
@@ -63,8 +64,8 @@ main {
   display: grid;
   place-items: center;
   background-color: var(--secondary-color);
-  max-width: 30rem;
-  max-height: 30rem;
+  width: 30rem;
+  height: 30rem;
   padding: 1.5rem;
 }
 
@@ -109,12 +110,25 @@ input[type="color"] {
   height: 3rem;
   border-radius: 50%;
 }
+
 input[type="color"]::-webkit-color-swatch-wrapper {
   padding: 0;
 }
+
 input[type="color"]::-webkit-color-swatch {
-  border: none;
+  border: var(--primary-color) solid 2px;
   border-radius: 50%;
+}
+
+.random-color:hover,
+input[type="color"]:hover {
+  transform: scale(1.05);
+}
+
+.random-color:active,
+input[type="color"]:active {
+  transition: ease-in 0.05s;
+  transform: scale(1);
 }
 
 .random-color {
