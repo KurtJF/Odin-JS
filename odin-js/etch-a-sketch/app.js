@@ -1,3 +1,4 @@
+// DOM Elements
 const gridContainer = document.getElementById("grid-container");
 const sizeValue = document.getElementById("grid-size-label");
 const sizeRange = document.getElementById("grid-size");
@@ -9,35 +10,72 @@ let gridSize = 16;
 let isMouseDown = false;
 let userRandomColor = false;
 
+// GRID Size
 const updateGridSize = (newGridSize) => {
   gridSize.innerHTML = newGridSize;
   sizeValue.innerHTML = `${newGridSize} x ${newGridSize}`;
 };
 
+sizeRange.addEventListener("input", (event) => {
+  const newGridSize = event.target.value;
+  gridContainer.innerHTML = "";
+  updateGridSize(newGridSize);
+  createGrid();
+});
+
+// COLOR Update
+const updateColor = (color) => {
+  userRandomColor = false;
+
+  if (color === "random") {
+    userRandomColor = true;
+    color = getRandomColor();
+  }
+
+  document.querySelectorAll("grid").forEach((grid) => {
+    grid.style.backgroundColor = color;
+  });
+};
+
 btnRandom.addEventListener("click", () => {
-  userRandomColor = !userRandomColor;
+  updateColor("random");
 });
 
 colorPicker.addEventListener("input", (event) => {
-  userRandomColor = false;
+  updateColor(event.target.value);
 });
 
 const getRandomColor = () => {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 };
 
-const applyColor = (color) => {
-  document.querySelectorAll(".grid").forEach((grid) => {
-    grid.style.backgroundColor = color;
-  });
-};
+// btnRandom.addEventListener("click", () => {
+//   userRandomColor = !userRandomColor;
+// });
 
-// Reset Etch-A-Sketch
+// colorPicker.addEventListener("input", (event) => {
+//   userRandomColor = false;
+// });
+
+// const applyColor = (color) => {
+//   document.querySelectorAll(".grid").forEach((grid) => {
+//     grid.style.backgroundColor = color;
+//   });
+// };
+
+// RESET Button
 btnReset.addEventListener("click", () => {
   gridContainer.innerHTML = "";
 
   createGrid(gridSize);
 });
+
+// function reset() {
+//   gridContainer.innerHTML = "";
+//   createGrid(gridSize);
+// }
+
+// btnReset.addEventListener('click', reset);
 
 document.addEventListener("mousedown", () => {
   isMouseDown = true;
@@ -66,5 +104,3 @@ const createGrid = () => {
     });
   }
 };
-
-createGrid();
