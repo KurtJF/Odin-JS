@@ -6,19 +6,21 @@ const btnReset = document.getElementById("reset");
 const colorPicker = document.getElementById("color");
 const btnRandom = document.getElementById("random-color");
 
+const defaultSize = 16;
+
 let gridSize = 16;
 let isMouseDown = false;
 let userRandomColor = false;
 
 // GRID Size
 const updateGridSize = (newGridSize) => {
-  gridSize.innerHTML = newGridSize;
-  sizeValue.innerHTML = `${newGridSize} x ${newGridSize}`;
+  gridSize = newGridSize;
+  sizeValue.innerHTML = `${gridSize} x ${gridSize}`;
 };
 
 sizeRange.addEventListener("input", (event) => {
   const newGridSize = event.target.value;
-  gridContainer.innerHTML = "";
+  clear();
   updateGridSize(newGridSize);
   createGrid();
 });
@@ -49,33 +51,14 @@ const getRandomColor = () => {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 };
 
-// btnRandom.addEventListener("click", () => {
-//   userRandomColor = !userRandomColor;
-// });
-
-// colorPicker.addEventListener("input", (event) => {
-//   userRandomColor = false;
-// });
-
-// const applyColor = (color) => {
-//   document.querySelectorAll(".grid").forEach((grid) => {
-//     grid.style.backgroundColor = color;
-//   });
-// };
-
 // RESET Button
 btnReset.addEventListener("click", () => {
-  gridContainer.innerHTML = "";
-
+  clear();
   createGrid(gridSize);
 });
 
-// function reset() {
-//   gridContainer.innerHTML = "";
-//   createGrid(gridSize);
-// }
-
-// btnReset.addEventListener('click', reset);
+// CLEAR
+const clear = () => (gridContainer.innerHTML = "");
 
 document.addEventListener("mousedown", () => {
   isMouseDown = true;
@@ -85,6 +68,7 @@ document.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
 
+// GRID
 const createGrid = () => {
   gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
   gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
@@ -104,3 +88,5 @@ const createGrid = () => {
     });
   }
 };
+
+createGrid();
