@@ -23,3 +23,51 @@ body {
 }
 
 /* START */
+
+:root {
+  --bg-color: #575757;
+  --calc-color: #d1d1d1;
+}
+
+body {
+  background-color: var(--bg-color);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  margin: auto;
+}
+
+.main-container {
+  max-width: 15rem;
+  background-color: var(--calc-color);
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.display {
+  border: 2px solid black;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.span {
+  grid-column: span 2;
+}
+
+.btn {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid black;
+}
