@@ -12,12 +12,16 @@
       <div class="main-container">
         <h1>CASHEW</h1>
         <section class="display">
-          <output class="input-display"></output>
-          <output class="output-display"></output>
+          <output id="inputDisplay" class="input-display">72</output>
+          <output id="outputDisplay" class="output-display">721</output>
         </section>
         <section class="buttons grid">
-          <button class="btn span" aria-label="all clear">AC</button>
-          <button class="btn span" aria-label="clear entry">CE</button>
+          <button id="btnClear" class="btn btn-width" aria-label="Clear">
+            AC
+          </button>
+          <button id="btnDelete" class="btn btn-width" aria-label="Delete">
+            CE
+          </button>
           <!-- Row -->
           <button class="btn num" data-number aria-label="Number 7">
             <span class="visually-hidden">Seven</span>
@@ -67,12 +71,26 @@
             −
           </button>
           <!-- Row -->
-          <button class="btn num" data-number>.</button>
+          <button
+            id="btnDecimal"
+            class="btn num"
+            data-number
+            aria-label="Decimal Point"
+          >
+            .
+          </button>
           <button class="btn num" data-number aria-label="Number 0">
             <span class="visually-hidden">Zero</span>
             0
           </button>
-          <button class="btn num" data-operator>=</button>
+          <button
+            id="btnEquals"
+            class="btn num"
+            data-operator
+            aria-label="Equals"
+          >
+            =
+          </button>
           <button class="btn operator" data-operator aria-label="Add">+</button>
         </section>
       </div>
